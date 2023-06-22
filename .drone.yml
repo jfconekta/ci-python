@@ -1,0 +1,20 @@
+kind: pipeline
+name: default
+
+steps:
+- name: test
+  image: python:3
+  environment:
+     CC_TEST_REPORTER_ID:
+         from_secret: cc_token_id
+  commands:
+  - pip install -r requirements.txt
+  - pytest
+  - coverage run test_app.py
+  - coverage lcov
+  - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json coverage.lcov
+  - ./cc-test-reporter upload-coverage
+  when:
+    event:
+    - pull_request
+
