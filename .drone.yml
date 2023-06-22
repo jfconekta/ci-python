@@ -7,6 +7,8 @@ steps:
      CC_TEST_REPORTER_ID:
          from_secret: cc_token_id
   commands:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > "cc-test-reporter"
+  - chmod +x "cc-test-reporter"
   - pip install -r requirements.txt
   - coverage run test_app.py
   - coverage lcov
