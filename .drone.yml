@@ -8,7 +8,6 @@ steps:
          from_secret: cc_token_id
   commands:
   - pip install -r requirements.txt
-  - pytest
   - coverage run test_app.py
   - coverage lcov
   - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json coverage.lcov
